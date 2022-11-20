@@ -5,7 +5,7 @@ function App() {
 
   return (
     <div className="App">
-      Samyak OCR app
+      Samyak OCR app which can scan & extract text on a image.
     </div>
   )
 }
