@@ -4,8 +4,12 @@
 function App() {
 
   return (
-    <div className="App">
+    <div className="">
+      <h1 className="text-3xl font-bold underline">
+
+
       Samyak OCR app which can scan & extract text on a image.
+      </h1>
     </div>
   )
 }
