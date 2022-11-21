@@ -1,13 +1,25 @@
 import { useState } from "react";
+import Tesseract from "tesseract.js";
 // import './App.css'
 
 function App() {
-  // const [loading, setLoading] = useState(false);
-  const [progress, setProgress] = useState(0);
   const [text, setText] = useState("");
   const [image, setImage] = useState("");
 
-  const handleSubmit = () => {};
+  const handleSubmit = () => {
+    Tesseract.recognize(image, "eng", {
+      logger: (m) => {
+        console.log(m);
+      },
+    })
+      .catch((err) => {
+        console.log(err);
+      })
+      .then((result) => {
+        console.log(result.data);
+        setText(result.data.text);
+      });
+  };
 
   return (
     <>
@@ -16,10 +28,11 @@ function App() {
         <input
           type="file"
           onChange={(e) => setImage(URL.createObjectURL(e.target.files[0]))}
+          className=""
         />
         <input
           type="button"
-          onChange={handleSubmit}
+          onClick={handleSubmit}
           className="bg-black text-white p-2 rounded-md"
           value="Convert"
         />
