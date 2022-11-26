@@ -5,7 +5,7 @@ import Tesseract from "tesseract.js";
 function App() {
   const [text, setText] = useState("");
   const [image, setImage] = useState("");
-  const [mode, setMode] = useState("capture");
+  const [mode, setMode] = useState("upload");
 
   const handleSubmit = () => {
     Tesseract.recognize(image, "eng", {
@@ -22,16 +22,21 @@ function App() {
       });
   };
 
+  const handleOnClick = (e) => {
+    setImage(URL.createObjectURL(e.target.files[0]));
+    handleSubmit();
+  };
+
   const handleMode = () => {
-    setMode("upload");
+    mode === "upload" ? setMode("capture") : setMode("upload");
   };
 
   return (
     <>
       {/* container  */}
-      <div>
+      <div className="container mx-auto my-10">
         {/* upload capture toggle  */}
-        <div>
+        <div className="">
           <label class="inline-flex relative items-center cursor-pointer">
             <input
               type="checkbox"
@@ -50,32 +55,73 @@ function App() {
             </span>
           </label>
         </div>
+
+        {/* input & output blocks */}
+        <div className="flex h-[60vh] mt-4">
+          {/* input block */}
+          <div className="w-[50%] mr-4">
+            {mode === "capture" ? (
+              <div className="h-[60vh] border-2 border-gray-300 border-dashed rounded-md p-4 appearance-none cursor-pointer hover:border-gray-400 focus:outline-none">
+                capture
+              </div>
+            ) : (
+              <>
+                <div class="max-w-xl">
+                  <label class="flex justify-center w-full h-[60vh] px-4 transition bg-white border-2 border-gray-300 border-dashed rounded-md appearance-none cursor-pointer hover:border-gray-400 focus:outline-none">
+                    <span class="flex items-center space-x-2">
+                      <span class="font-medium text-gray-600">
+                        Drag & Drop files here, or <br />
+                        <div class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center mr-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 gap-2 mt-2">
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            strokeWidth={1.5}
+                            stroke="currentColor"
+                            className="w-6 h-6"
+                          >
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5m-13.5-9L12 3m0 0l4.5 4.5M12 3v13.5"
+                            />
+                          </svg>
+                          Browse Files
+                        </div>
+                      </span>
+                    </span>
+                    <input
+                      type="file"
+                      onChange={(e) =>
+                        // setImage(URL.createObjectURL(e.target.files[0]))
+                        handleOnClick(e)
+                      }
+                      name="file_upload"
+                      class="hidden"
+                    />
+                  </label>
+                </div>
+              </>
+            )}
+          </div>
+
+          {/* output block */}
+
+          <div className="p-4 h-[60vh] w-[50%] border-2 border-gray-300 border-dashed rounded-md appearance-none cursor-pointer hover:border-gray-400 focus:outline-none">
+            Output
+            <div>{text}</div>
+          </div>
+        </div>
       </div>
 
       {/* ==================================================================== */}
       <div className="container">
-        <p className="text-3xl font-bold text-center mb-20">OCR app</p>
-        <input
-          type="file"
-          onChange={(e) => setImage(URL.createObjectURL(e.target.files[0]))}
-          className=""
-        />
         <input
           type="button"
           onClick={handleSubmit}
           className="bg-black text-white p-2 rounded-md"
           value="Convert"
         />
-
-        <div className="flex border-black border-2 mt-10 items-stretch w-[50%]">
-          <textarea
-            cols="50"
-            rows="10"
-            className=""
-            value={text}
-            onChange={(e) => setText(e.target.value)}
-          ></textarea>
-        </div>
       </div>
     </>
   );
