@@ -23,7 +23,8 @@ function App() {
   };
 
   const handleOnClick = (e) => {
-    setImage(URL.createObjectURL(e.target.files[0]));
+    // setImage(URL.createObjectURL(e.target.files[0]));
+    setImage(e);
     handleSubmit();
   };
 
@@ -66,7 +67,7 @@ function App() {
               </div>
             ) : (
               <>
-                <div class="max-w-xl">
+                <div class="">
                   <label class="flex justify-center w-full h-[60vh] px-4 transition bg-white border-2 border-gray-300 border-dashed rounded-md appearance-none cursor-pointer hover:border-gray-400 focus:outline-none">
                     <span class="flex items-center space-x-2">
                       <span class="font-medium text-gray-600">
@@ -92,9 +93,9 @@ function App() {
                     </span>
                     <input
                       type="file"
-                      onChange={(e) =>
-                        // setImage(URL.createObjectURL(e.target.files[0]))
-                        handleOnClick(e)
+                      onChange={
+                        (e) => setImage(URL.createObjectURL(e.target.files[0]))
+                        // handleOnClick(URL.createObjectURL(e.target.files[0]))
                       }
                       name="file_upload"
                       class="hidden"
@@ -112,16 +113,16 @@ function App() {
             <div>{text}</div>
           </div>
         </div>
-      </div>
 
-      {/* ==================================================================== */}
-      <div className="container">
-        <input
-          type="button"
-          onClick={handleSubmit}
-          className="bg-black text-white p-2 rounded-md"
-          value="Convert"
-        />
+        {/* convert button */}
+        <div className="mt-4 justify-center flex">
+          <button
+            onClick={handleSubmit}
+            className="bg-black text-white p-2 rounded-md w-20 mx-auto"
+          >
+            Start
+          </button>
+        </div>
       </div>
     </>
   );
