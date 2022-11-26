@@ -32,6 +32,16 @@ function App() {
     mode === "upload" ? setMode("capture") : setMode("upload");
   };
 
+  const handleDragOver = (event)=>{
+    event.preventDefault();
+  }
+
+  const handleDrop = (event)=>{
+    event.preventDefault();
+    console.log(event.dataTransfer.files);
+    setImage(URL.createObjectURL(event.dataTransfer.files[0]));
+  }
+
   return (
     <>
       {/* container  */}
@@ -67,7 +77,7 @@ function App() {
               </div>
             ) : (
               <>
-                <div class="">
+                <div class="" onDragOver={handleDragOver} onDrop={handleDrop}>
                   <label class="flex justify-center w-full h-[60vh] px-4 transition bg-white border-2 border-gray-300 border-dashed rounded-md appearance-none cursor-pointer hover:border-gray-400 focus:outline-none">
                     <span class="flex items-center space-x-2">
                       <span class="font-medium text-gray-600">
@@ -124,7 +134,7 @@ function App() {
               Capture
             </button>
           </div>
-          
+
           {/* convert button */}
           <div className="">
             <button
@@ -134,8 +144,6 @@ function App() {
               Start
             </button>
           </div>
-
-          
         </div>
       </div>
     </>
