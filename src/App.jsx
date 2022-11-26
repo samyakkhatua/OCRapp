@@ -114,14 +114,28 @@ function App() {
           </div>
         </div>
 
-        {/* convert button */}
-        <div className="mt-4 justify-center flex">
-          <button
-            onClick={handleSubmit}
-            className="bg-black text-white p-2 rounded-md w-20 mx-auto"
-          >
-            Start
-          </button>
+        <div className="flex justify-center gap-2 mt-4">
+          {/* Capture button */}
+          <div className="">
+            <button
+              onClick=""
+              className="bg-black text-white p-2 rounded-md w-20 mx-auto"
+            >
+              Capture
+            </button>
+          </div>
+          
+          {/* convert button */}
+          <div className="">
+            <button
+              onClick={handleSubmit}
+              className="bg-black text-white p-2 rounded-md w-20 mx-auto"
+            >
+              Start
+            </button>
+          </div>
+
+          
         </div>
       </div>
     </>
