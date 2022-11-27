@@ -1,11 +1,28 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import Tesseract from "tesseract.js";
+import {WebcamCapture} from "./components/WebcamCapture"
+
+// import Webcam from "react-webcam";
+// const WebcamComponent = () => <Webcam />;
+// const videoConstraints = {
+//   width: 400,
+//   height: 400,
+//   facingMode: "user",
+// };
+
 // import './App.css'
 
 function App() {
   const [text, setText] = useState("");
   const [image, setImage] = useState("");
   const [mode, setMode] = useState("upload");
+
+  // const [picture, setPicture] = useState("");
+  // const webcamRef = React.useRef(null);
+  // const capture = React.useCallback(() => {
+  //   const pictureSrc = webcamRef.current.getScreenshot();
+  //   setPicture(pictureSrc);
+  // });
 
   const handleSubmit = () => {
     Tesseract.recognize(image, "eng", {
@@ -22,25 +39,25 @@ function App() {
       });
   };
 
-  const handleOnClick = (e) => {
-    // setImage(URL.createObjectURL(e.target.files[0]));
-    setImage(e);
-    handleSubmit();
-  };
+  // const handleOnClick = (e) => {
+  //   // setImage(URL.createObjectURL(e.target.files[0]));
+  //   setImage(e);
+  //   handleSubmit();
+  // };
 
   const handleMode = () => {
     mode === "upload" ? setMode("capture") : setMode("upload");
   };
 
-  const handleDragOver = (event)=>{
+  const handleDragOver = (event) => {
     event.preventDefault();
-  }
+  };
 
-  const handleDrop = (event)=>{
+  const handleDrop = (event) => {
     event.preventDefault();
     console.log(event.dataTransfer.files);
     setImage(URL.createObjectURL(event.dataTransfer.files[0]));
-  }
+  };
 
   return (
     <>
@@ -48,7 +65,7 @@ function App() {
       <div className="container mx-auto my-10">
         {/* upload capture toggle  */}
         <div className="">
-          <label class="inline-flex relative items-center cursor-pointer">
+          <label className="inline-flex relative items-center cursor-pointer">
             <input
               type="checkbox"
               value=""
@@ -61,7 +78,7 @@ function App() {
               onClick={handleMode}
             ></div>
 
-            <span class="ml-3 text-sm font-medium text-gray-900 dark:text-gray-300">
+            <span className="ml-3 text-sm font-medium text-gray-900 dark:text-gray-300">
               {mode}
             </span>
           </label>
@@ -73,7 +90,9 @@ function App() {
           <div className="w-[50%] mr-4">
             {mode === "capture" ? (
               <div className="h-[60vh] border-2 border-gray-300 border-dashed rounded-md p-4 appearance-none cursor-pointer hover:border-gray-400 focus:outline-none">
-                capture
+                {/* ==================== */}
+                
+                {/* ==================== */}
               </div>
             ) : (
               <>
@@ -81,7 +100,8 @@ function App() {
                   <label class="flex justify-center w-full h-[60vh] px-4 transition bg-white border-2 border-gray-300 border-dashed rounded-md appearance-none cursor-pointer hover:border-gray-400 focus:outline-none">
                     <span class="flex items-center space-x-2">
                       <span class="font-medium text-gray-600">
-                        Drag & Drop files here, or <br />
+                        Drag & Drop files here,
+                        <br /> or <br />
                         <div class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center mr-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 gap-2 mt-2">
                           <svg
                             xmlns="http://www.w3.org/2000/svg"
@@ -117,9 +137,8 @@ function App() {
           </div>
 
           {/* output block */}
-
           <div className="p-4 h-[60vh] w-[50%] border-2 border-gray-300 border-dashed rounded-md appearance-none cursor-pointer hover:border-gray-400 focus:outline-none">
-            Output
+            <span className="font-medium text-gray-600">Output</span>
             <div>{text}</div>
           </div>
         </div>
@@ -145,6 +164,12 @@ function App() {
             </button>
           </div>
         </div>
+      </div>
+
+      {/* demo cam */}
+      <div>
+        {/* <Webcam /> */}
+        {/* <WebcamCapture/> */}
       </div>
     </>
   );
