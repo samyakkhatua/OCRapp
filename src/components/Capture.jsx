@@ -30,7 +30,7 @@ const Capture = () => {
           screenshotFormat="image/jpeg"
           videoConstraints={videoContraints}
           onUserMedia={onUserMedia}
-          mirrored={true}
+          mirrored={false}
           screenshotQuality={1}
           
         />
@@ -42,7 +42,7 @@ const Capture = () => {
             url &&
 
             <>
-            <div>
+            <div>{url}
                 <img src={url} alt="Screenshot" />
             </div>
             </>

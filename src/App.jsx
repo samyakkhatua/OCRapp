@@ -45,9 +45,6 @@ function App() {
 
   return (
     <>
-    <div>
-      
-    </div>
       {/* container  */}
       <div className="container mx-auto my-10">
         {/* upload capture toggle  */}
