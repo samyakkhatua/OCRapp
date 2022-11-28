@@ -1,28 +1,12 @@
 import React, { useState } from "react";
 import Tesseract from "tesseract.js";
-import {WebcamCapture} from "./components/WebcamCapture"
-
-// import Webcam from "react-webcam";
-// const WebcamComponent = () => <Webcam />;
-// const videoConstraints = {
-//   width: 400,
-//   height: 400,
-//   facingMode: "user",
-// };
-
-// import './App.css'
+import './App.css'
+import Capture from "./components/Capture";
 
 function App() {
   const [text, setText] = useState("");
   const [image, setImage] = useState("");
   const [mode, setMode] = useState("upload");
-
-  // const [picture, setPicture] = useState("");
-  // const webcamRef = React.useRef(null);
-  // const capture = React.useCallback(() => {
-  //   const pictureSrc = webcamRef.current.getScreenshot();
-  //   setPicture(pictureSrc);
-  // });
 
   const handleSubmit = () => {
     Tesseract.recognize(image, "eng", {
@@ -61,6 +45,9 @@ function App() {
 
   return (
     <>
+    <div>
+      
+    </div>
       {/* container  */}
       <div className="container mx-auto my-10">
         {/* upload capture toggle  */}
@@ -90,9 +77,7 @@ function App() {
           <div className="w-[50%] mr-4">
             {mode === "capture" ? (
               <div className="h-[60vh] border-2 border-gray-300 border-dashed rounded-md p-4 appearance-none cursor-pointer hover:border-gray-400 focus:outline-none">
-                {/* ==================== */}
-                
-                {/* ==================== */}
+                <Capture />
               </div>
             ) : (
               <>
@@ -168,8 +153,7 @@ function App() {
 
       {/* demo cam */}
       <div>
-        {/* <Webcam /> */}
-        {/* <WebcamCapture/> */}
+        {/* <capture /> */}
       </div>
     </>
   );
