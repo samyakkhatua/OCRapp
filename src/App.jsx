@@ -137,7 +137,7 @@ function App() {
             
             <div className="relative mb-4">
               <span className="font-medium text-xl text-gray-600">Output</span>
-              <button className="bg-gray-600 text-white rounded-md w-[50px] h-[30px] absolute bottom-0 right-0">
+              <button className="bg-gray-600 hover:bg-gray-800 text-white rounded-md w-[50px] h-[30px] absolute bottom-0 right-0">
                 Copy
               </button>
             </div>
