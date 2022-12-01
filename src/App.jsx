@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Tesseract from "tesseract.js";
-import './App.css'
+import "./App.css";
 import Capture from "./components/Capture";
 
 function App() {
@@ -12,7 +12,7 @@ function App() {
 
   const handleCimg = (data) => {
     console.log(data);
-  }
+  };
 
   const handleSubmit = () => {
     Tesseract.recognize(image, "eng", {
@@ -82,16 +82,17 @@ function App() {
               // =============================================
 
               <div className="h-[60vh] border-2 border-gray-300 border-dashed rounded-md p-4 appearance-none cursor-pointer hover:border-gray-400 focus:outline-none">
-                
                 <Capture onSubmit={handleCimg} />
-
               </div>
-
-            // =============================================
-
             ) : (
+              // =============================================
+
               <>
-                <div className="" onDragOver={handleDragOver} onDrop={handleDrop}>
+                <div
+                  className=""
+                  onDragOver={handleDragOver}
+                  onDrop={handleDrop}
+                >
                   <label className="flex justify-center w-full h-[60vh] px-4 transition bg-white border-2 border-gray-300 border-dashed rounded-md appearance-none cursor-pointer hover:border-gray-400 focus:outline-none">
                     <span className="flex items-center space-x-2">
                       <span className="font-medium text-gray-600">
@@ -133,17 +134,22 @@ function App() {
 
           {/* output block */}
           <div className="p-4 h-[60vh] w-[50%] border-2 border-gray-300 border-dashed rounded-md appearance-none cursor-pointer hover:border-gray-400 focus:outline-none">
-            <span className="font-medium text-gray-600">Output</span>
-            <div>{text}</div>
+            
+            <div className="relative mb-4">
+              <span className="font-medium text-xl text-gray-600">Output</span>
+              <button className="bg-gray-600 text-white rounded-md w-[50px] h-[30px] absolute bottom-0 right-0">
+                Copy
+              </button>
+            </div>
+
+            <div className="text-sm">{text}</div>
           </div>
         </div>
 
         <div className="flex justify-center gap-2 mt-4">
           {/* Capture button */}
           <div className="">
-            <button
-              className="bg-black text-white p-2 rounded-md w-20 mx-auto"
-            >
+            <button className="bg-black text-white p-2 rounded-md w-20 mx-auto">
               Capture
             </button>
           </div>
@@ -158,11 +164,6 @@ function App() {
             </button>
           </div>
         </div>
-      </div>
-
-      {/* demo cam */}
-      <div>
-        {/* <capture /> */}
       </div>
     </>
   );
