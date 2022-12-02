@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { CopyToClipboard } from "react-copy-to-clipboard";
 import Tesseract from "tesseract.js";
 import "./App.css";
 import Capture from "./components/Capture";
@@ -134,12 +135,13 @@ function App() {
 
           {/* output block */}
           <div className="p-4 h-[60vh] w-[50%] border-2 border-gray-300 border-dashed rounded-md appearance-none cursor-pointer hover:border-gray-400 focus:outline-none">
-            
             <div className="relative mb-4">
               <span className="font-medium text-xl text-gray-600">Output</span>
-              <button className="bg-gray-600 hover:bg-gray-800 text-white rounded-md w-[50px] h-[30px] absolute bottom-0 right-0">
-                Copy
-              </button>
+              <CopyToClipboard>
+                <button className="bg-gray-600 hover:bg-gray-800 text-white rounded-md w-[50px] h-[30px] absolute bottom-0 right-0">
+                  Copy
+                </button>
+              </CopyToClipboard>
             </div>
 
             <div className="text-sm">{text}</div>
