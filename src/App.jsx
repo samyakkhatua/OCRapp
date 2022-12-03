@@ -9,6 +9,7 @@ function App() {
   const [image, setImage] = useState("");
   const [mode, setMode] = useState("upload");
 
+  // capture image url
   const [cimg, setCimg] = useState("");
 
   const handleCimg = (data) => {
