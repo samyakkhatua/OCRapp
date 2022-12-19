@@ -4,12 +4,10 @@ import Tesseract from "tesseract.js";
 import "./App.css";
 import Capture from "./components/Capture";
 
-// line from HP
-
 function App() {
   const [text, setText] = useState("");
   const [image, setImage] = useState("");
-  const [mode, setMode] = useState("upload");
+  const [mode, setMode] = useState("upload image");
 
   // capture image url
   const [cimg, setCimg] = useState("");
@@ -40,7 +38,7 @@ function App() {
   // };
 
   const handleMode = () => {
-    mode === "upload" ? setMode("capture") : setMode("upload");
+    mode === "upload image" ? setMode("capture image") : setMode("upload image");
   };
 
   const handleDragOver = (event) => {
