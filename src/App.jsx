@@ -4,6 +4,8 @@ import Tesseract from "tesseract.js";
 import "./App.css";
 import Capture from "./components/Capture";
 
+// line from HP
+
 function App() {
   const [text, setText] = useState("");
   const [image, setImage] = useState("");
