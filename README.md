@@ -1,2 +1,2 @@
 # OCRapp
-## Optical Character Recognition
+OCR
