@@ -83,6 +83,8 @@ function App() {
 
         {/* input & output blocks */}
         <div className="flex h-[60vh] mt-4">
+
+
           {/* input block */}
           <div className="w-[50%] mr-4">
             {mode === "capture" ? (
@@ -154,6 +156,8 @@ function App() {
           </div>
         </div>
 
+
+        {/* Utilily buttons for using OCR */}
         <div className="flex justify-center gap-2 mt-4">
           {/* Capture button */}
           <div className="">
