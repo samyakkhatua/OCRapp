@@ -8,7 +8,7 @@ import "./App.css";
 
 function App() {
   const [text, setText] = useState("");
-  // const [image, setImage] = useState("");
+  const [image, setImage] = useState("");
   const [mode, setMode] = useState("upload image");
 
   const handleSubmit = () => {
@@ -154,21 +154,21 @@ function App() {
         {/* Utilily buttons for using OCR */}
         <div className="flex justify-center gap-2 mt-4">
           {/* Capture button */}
-          <div className="">
+          {/* <div className="">
             <button className="bg-black text-white p-2 rounded-md w-20 mx-auto">
               Capture
             </button>
-          </div>
+          </div> */}
 
           {/* convert button */}
-          {/* <div className="">
+          <div className="">
             <button
               onClick={handleSubmit}
               className="bg-black text-white p-2 rounded-md w-20 mx-auto"
             >
               Start
             </button>
-          </div> */}
+          </div>
         </div>
       </div>
     </>
