@@ -1,5 +1,9 @@
 import React from 'react'
 
-export const ProgressButton = () => { return (
-    <div>ProgressButton</div> )
+const ProgressButton = () => {
+  return (
+    <div>ProgressButton</div>
+  )
 }
+
+export default ProgressButton

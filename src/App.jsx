@@ -160,7 +160,7 @@ function App() {
             </button>
           </div> */}
 
-          {/* convert button */}
+          {/* convert (START) button */}
           <div className="">
             <button
               onClick={handleSubmit}
