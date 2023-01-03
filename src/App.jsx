@@ -1,8 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import Tesseract from "tesseract.js";
 import "./App.css";
 import Capture from "./components/Capture";
+
+import Webcam from "react-webcam";
 
 function App() {
   const [text, setText] = useState("");
@@ -43,6 +45,7 @@ function App() {
     mode === "upload image" ? setMode("capture image") : setMode("upload image");
   };
 
+  // drag And drop functions
   const handleDragOver = (event) => {
     event.preventDefault();
   };
@@ -53,6 +56,38 @@ function App() {
     setImage(URL.createObjectURL(event.dataTransfer.files[0]));
   };
 
+  //======================================
+
+  const videoContraints = {
+    width: 540, 
+    facingMode: "environment",
+  };
+  
+  const Capture = (props) => {
+      // states
+    const webcamRef = useRef(null);
+    const [imageSrc, setImageSrc] = useState(second)
+    const [url, setUrl] = useState(null);
+  
+    const capturePhoto = React.useCallback(async () => {
+      // const imageSrc = webcamRef.current.getScreenshot();
+      setImageSrc(webcamRef.current.getScreenshot())
+      setUrl(imageSrc);
+      console.log("captured URl:", imageSrc);
+    }, [webcamRef]);
+  
+    const handleSubmit = (e) => {
+      e.preventDefault();
+      props.onSubmit(url);
+      console.log(url);
+    };
+  
+    const onUserMedia = (e) => {
+      console.log(e);
+    };
+  }
+  //======================================
+  
   return (
     <>
       {/* container  */}
@@ -87,15 +122,62 @@ function App() {
 
           {/* input block */}
           <div className="w-[50%] mr-4">
-            {mode === "capture" ? (
+            {mode === "capture image" ? (
               // =============================================
 
-              <div className="h-[60vh] border-2 border-gray-300 border-dashed rounded-md p-4 appearance-none cursor-pointer hover:border-gray-400 focus:outline-none">
-                <Capture onSubmit={handleCimg} />
+              // <div className="h-[60vh] border-2 border-gray-300 border-dashed rounded-md p-4 appearance-none cursor-pointer hover:border-gray-400 focus:outline-none">
+              //   <Capture onSubmit={handleCimg} />
+              // </div>
+              <>
+              <div className="">
+                <Webcam
+                  ref={webcamRef}
+                  audio={true}
+                  screenshotFormat="image/jpeg"
+                  videoConstraints={videoContraints}
+                  onUserMedia={onUserMedia}
+                  mirrored={false}
+                  screenshotQuality={1}
+                />
+
+                {/* Capture button */}
+                <button
+                  className="bg-black text-white p-2 rounded-md w-20 mx-auto"
+                  onClick={capturePhoto}
+                >
+                  Capture
+                </button>
+
+                {/* Refresh button */}
+                <button
+                  className="bg-black text-white p-2 rounded-md w-20 mx-auto"
+                  onClick={() => setUrl(null)}
+                >
+                  Refresh
+                </button>
+
+                {/* send button */}
+                <button
+                  className="bg-black text-white p-2 rounded-md w-20 mx-auto"
+                  onSubmit={handleSubmit}
+                >
+                  Send
+                </button>
+
+                {url && (
+                  <>
+                    <div>
+                      {url}
+                      <img src={url} alt="Screenshot" />
+                    </div>
+                  </>
+                )}
               </div>
+    
+              </>
             ) : (
               // =============================================
-
+              // component for upload file mode 
               <>
                 <div
                   className=""
