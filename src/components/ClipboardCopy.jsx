@@ -1,10 +1,4 @@
-import React from 'react'
-
-// const ClipboardCopy = () => {
-//   return (
-//     <div>ClipboardCopy</div>
-//   )
-// }
+import React, { useState } from "react";
 
 const ClipboardCopy = ({ copyText }) => {
     const [isCopied, setIsCopied] = useState(false);
@@ -38,7 +32,7 @@ const ClipboardCopy = ({ copyText }) => {
       <div>
         <input type="text" value={copyText} readOnly />
         {/* Bind our handler function to the onClick button property */}
-        <button onClick={handleCopyClick}>
+        <button className="bg-gray-600 hover:bg-gray-800 text-white rounded-md px-2 h-[30px] absolute bottom-0 right-0" onClick={handleCopyClick}>
           <span>{isCopied ? 'Copied!' : 'Copy'}</span>
         </button>
       </div>

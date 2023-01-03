@@ -2,6 +2,7 @@ import React, { useState, useRef } from "react";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import Tesseract from "tesseract.js";
 import "./App.css";
+import ClipboardCopy from "./components/ClipboardCopy";
 // import Capture from "./components/Capture";
 
 // import Webcam from "react-webcam";
@@ -10,6 +11,7 @@ function App() {
   const [text, setText] = useState("");
   const [image, setImage] = useState("");
   const [mode, setMode] = useState("upload image");
+  const [copyText, setCopyText] = useState("default")
 
   const handleSubmit = () => {
     Tesseract.recognize(image, "eng", {
@@ -23,6 +25,7 @@ function App() {
       .then((result) => {
         console.log(result.data);
         setText(result.data.text);
+        setCopyText(result.data.text);
       });
   };
 
@@ -41,6 +44,11 @@ function App() {
     console.log(event.dataTransfer.files);
     setImage(URL.createObjectURL(event.dataTransfer.files[0]));
   };
+
+  // copy component call
+  const handleCopy = (e) => {
+
+  }
 
   return (
     <>
@@ -77,8 +85,8 @@ function App() {
           {/* input block */}
           <div className="w-[50%] mr-4">
             {mode === "capture image" ? (
-              // =============================================
 
+              //component for capture image
               <div className="h-[60vh] border-2 border-gray-300 border-dashed rounded-md p-4 appearance-none cursor-pointer hover:border-gray-400 focus:outline-none">
                 {/* <Capture onSubmit={handleCimg} /> */}
                     
@@ -88,7 +96,6 @@ function App() {
               </div>
               
             ) : (
-              // =============================================
               // component for upload file mode 
               <>
                 <div
@@ -139,11 +146,14 @@ function App() {
           <div className="p-4 h-[60vh] w-[50%] border-2 border-gray-300 border-dashed rounded-md appearance-none cursor-pointer hover:border-gray-400 focus:outline-none">
             <div className="relative mb-4">
               <span className="font-medium text-xl text-gray-600">Output</span>
-              <CopyToClipboard>
-                <button className="bg-gray-600 hover:bg-gray-800 text-white rounded-md w-[50px] h-[30px] absolute bottom-0 right-0">
-                  Copy
+              
+                {/* copy button  */}
+                <button className=""
+                  onClick={handleCopy}
+                >
+                  <ClipboardCopy copyText={copyText} />
                 </button>
-              </CopyToClipboard>
+
             </div>
 
             <div className="text-sm">{text}</div>
