@@ -2,21 +2,14 @@ import React, { useState, useRef } from "react";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import Tesseract from "tesseract.js";
 import "./App.css";
-import Capture from "./components/Capture";
+// import Capture from "./components/Capture";
 
-import Webcam from "react-webcam";
+// import Webcam from "react-webcam";
 
 function App() {
   const [text, setText] = useState("");
-  const [image, setImage] = useState("");
+  // const [image, setImage] = useState("");
   const [mode, setMode] = useState("upload image");
-
-  // capture image url
-  const [cimg, setCimg] = useState("");
-
-  const handleCimg = (data) => {
-    console.log(data);
-  };
 
   const handleSubmit = () => {
     Tesseract.recognize(image, "eng", {
@@ -32,13 +25,6 @@ function App() {
         setText(result.data.text);
       });
   };
-
-  // const handleOnClick = (e) => {
-  //   // setImage(URL.createObjectURL(e.target.files[0]));
-  //   setImage(e);
-  //   handleSubmit();
-  // };
-
 
   // change OCR mode of taking input : File upload or Capture ˀ
   const handleMode = () => {
@@ -56,38 +42,6 @@ function App() {
     setImage(URL.createObjectURL(event.dataTransfer.files[0]));
   };
 
-  //======================================
-
-  const videoContraints = {
-    width: 540, 
-    facingMode: "environment",
-  };
-  
-  const Capture = (props) => {
-      // states
-    const webcamRef = useRef(null);
-    const [imageSrc, setImageSrc] = useState(second)
-    const [url, setUrl] = useState(null);
-  
-    const capturePhoto = React.useCallback(async () => {
-      // const imageSrc = webcamRef.current.getScreenshot();
-      setImageSrc(webcamRef.current.getScreenshot())
-      setUrl(imageSrc);
-      console.log("captured URl:", imageSrc);
-    }, [webcamRef]);
-  
-    const handleSubmit = (e) => {
-      e.preventDefault();
-      props.onSubmit(url);
-      console.log(url);
-    };
-  
-    const onUserMedia = (e) => {
-      console.log(e);
-    };
-  }
-  //======================================
-  
   return (
     <>
       {/* container  */}
@@ -125,56 +79,14 @@ function App() {
             {mode === "capture image" ? (
               // =============================================
 
-              // <div className="h-[60vh] border-2 border-gray-300 border-dashed rounded-md p-4 appearance-none cursor-pointer hover:border-gray-400 focus:outline-none">
-              //   <Capture onSubmit={handleCimg} />
-              // </div>
-              <>
-              <div className="">
-                <Webcam
-                  ref={webcamRef}
-                  audio={true}
-                  screenshotFormat="image/jpeg"
-                  videoConstraints={videoContraints}
-                  onUserMedia={onUserMedia}
-                  mirrored={false}
-                  screenshotQuality={1}
-                />
-
-                {/* Capture button */}
-                <button
-                  className="bg-black text-white p-2 rounded-md w-20 mx-auto"
-                  onClick={capturePhoto}
-                >
-                  Capture
-                </button>
-
-                {/* Refresh button */}
-                <button
-                  className="bg-black text-white p-2 rounded-md w-20 mx-auto"
-                  onClick={() => setUrl(null)}
-                >
-                  Refresh
-                </button>
-
-                {/* send button */}
-                <button
-                  className="bg-black text-white p-2 rounded-md w-20 mx-auto"
-                  onSubmit={handleSubmit}
-                >
-                  Send
-                </button>
-
-                {url && (
-                  <>
-                    <div>
-                      {url}
-                      <img src={url} alt="Screenshot" />
-                    </div>
-                  </>
-                )}
+              <div className="h-[60vh] border-2 border-gray-300 border-dashed rounded-md p-4 appearance-none cursor-pointer hover:border-gray-400 focus:outline-none">
+                {/* <Capture onSubmit={handleCimg} /> */}
+                    
+                      <span className="flex justify-center items-center align-center space-x-2 font-medium text-gray-600">
+                        Feature coming Soon
+                      </span>
               </div>
-    
-              </>
+              
             ) : (
               // =============================================
               // component for upload file mode 
@@ -249,14 +161,14 @@ function App() {
           </div>
 
           {/* convert button */}
-          <div className="">
+          {/* <div className="">
             <button
               onClick={handleSubmit}
               className="bg-black text-white p-2 rounded-md w-20 mx-auto"
             >
               Start
             </button>
-          </div>
+          </div> */}
         </div>
       </div>
     </>
